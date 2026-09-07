@@ -1,4 +1,4 @@
-[9/7/2026 4:19 PM] طيبة فراس: import streamlit as st
+import streamlit as st
 
 # إعدادات الصفحة وواجهة المنصة الأكاديمية
 st.set_page_config(
@@ -117,7 +117,7 @@ if st.button("⚡ EXECUTE COMPUTATIONAL INTEGRATED RISK PREDICTION", use_contain
         st.markdown("#### 📊 Analytical Risk Assessment Output")
         st.metric(label="Predicted Fetal-Pathogenic Interaction Index", value="89.4% (High Risk Threshold)")
         st.warning("⚠️ Clinical Advisory: Significant virulence marker correlation detected with systemic inflammatory markers.")
-[9/7/2026 4:19 PM] طيبة فراس: # تنبيه إخلاء المسؤولية الأكاديمي أسفل الصفحة
+  # تنبيه إخلاء المسؤولية الأكاديمي أسفل الصفحة
 st.markdown("---")
 st.markdown(
     "<p style='text-align: center; color: #64748B; font-size: 12px;'>"
