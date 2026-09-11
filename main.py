@@ -218,3 +218,60 @@ if run_btn:
         </div>
         """, unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
+import streamlit as st
+
+# --- إضافة الشريط المزخرف الخاص بالأحياء المجهرية في نهاية الصفحة أو المكان المخصص ---
+st.markdown(
+    """
+    <style>
+    .microbe-banner {
+        width: 100%;
+        padding: 22px;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #008080 100%);
+        border-radius: 12px;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    /* إضافة نقشات جمالية تفاعلية تعبر عن الأحياء المجهرية والـ DNA */
+    .microbe-banner::before {
+        content: "🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        font-size: 20px;
+        letter-spacing: 15px;
+        opacity: 0.12;
+        white-space: nowrap;
+        animation: slideBanner 25s linear infinite;
+        display: flex;
+        align-items: center;
+    }
+    @keyframes slideBanner {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .microbe-banner-text {
+        position: relative;
+        z-index: 2;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    </style>
+
+    <div class="microbe-banner">
+        <div class="microbe-banner-text">
+            ✨ AI-Marshes Microbe Diagnostic System &nbsp;|&nbsp; Advanced Molecular & Clinical Insights 🦠🔬
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
