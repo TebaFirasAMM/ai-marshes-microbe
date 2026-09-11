@@ -129,7 +129,7 @@ with col1:
         value="ATGCGATCGATCGATC"
     )
     st.markdown("</div>", unsafe_allow_html=True)
- with col2:
+with col2:
     st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
     st.markdown("<h3>📊 Clinical & Laboratory Metrics</h3>", unsafe_allow_html=True)
     
