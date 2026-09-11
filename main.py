@@ -3,46 +3,55 @@ import re
 
 # Page Configuration
 st.set_page_config(
-    page_title="AI-Marshes Microbe - Academic Dashboard",
+    page_title="AI-Marshes Microbe - Diagnostic Hub",
     page_icon="🧬",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
-# Professional Academic Royal Green & Clean Styling (Enlarged Fonts & Emojis)
+# Professional Blue Tech & Medical Styling (Light Blue Background & Deep Blue Elements)
 st.markdown("""
     <style>
-    /* Global Clean Academic Background */
+    /* Global Page Background: Soft, comfortable light blue */
     .stApp {
-        background-color: #f4f6f8;
-        color: #1e293b;
-        font-size: 18px;
+        background-color: #f0f6ff;
+        color: #0f172a;
     }
     
-    /* Sidebar Styling */
-    section[data-testid="stSidebar"] {
-        background-color: #ffffff;
-        border-right: 2px solid #e2e8f0;
-    }
-    section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] .stMarkdown {
-        font-size: 17px !important;
-        font-weight: 600 !important;
-        color: #064e3b !important;
+    /* Main Header & Title Style */
+    h1 {
+        color: #1e3a8a !important;
+        font-weight: 800 !important;
+        font-size: 38px !important;
+        text-align: center;
     }
     
-    /* Elegant Academic Cards */
-    .academic-card {
+    /* Section & Subheaders */
+    h3, h4 {
+        color: #1e40af !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Professional Cards for Inputs & Results */
+    .dashboard-card {
         background-color: #ffffff;
         border: 1px solid #cbd5e1;
         padding: 30px;
         border-radius: 16px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.08);
         margin-bottom: 25px;
     }
     
-    /* Royal Green Button Styling */
+    /* Labels and Input Titles */
+    label, .stMarkdown p {
+        font-size: 17px !important;
+        font-weight: 600 !important;
+        color: #1e3a8a !important;
+    }
+    
+    /* Deep Blue & Teal Styled Button */
     .stButton>button {
-        background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+        background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
         color: #ffffff;
         font-weight: 700;
         width: 100%;
@@ -50,103 +59,97 @@ st.markdown("""
         padding: 15px;
         font-size: 18px;
         border: none;
-        box-shadow: 0 6px 15px rgba(6, 95, 70, 0.25);
+        box-shadow: 0 6px 20px rgba(29, 78, 216, 0.3);
         transition: all 0.3s ease;
     }
     .stButton>button:hover {
-        background: linear-gradient(135deg, #047857 0%, #064e3b 100%);
-        box-shadow: 0 8px 20px rgba(6, 95, 70, 0.4);
-    }
-    
-    /* Enlarged Headings & Text */
-    h1 {
-        color: #064e3b !important;
-        font-size: 36px !important;
-        font-weight: 800 !important;
-    }
-    h2, h3 {
-        color: #065f46 !important;
-        font-weight: 700 !important;
-    }
-    p, li, span {
-        font-size: 17px !important;
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+        box-shadow: 0 8px 25px rgba(29, 78, 216, 0.5);
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar Control Panel (Enlarged Emojis & Text)
-with st.sidebar:
-    st.markdown("<h2 style='text-align: center; color: #064e3b;'>🎛️ لوحة التحكم المختبري</h2>", unsafe_allow_html=True)
-    st.markdown("<hr style='border-color: #cbd5e1;'>", unsafe_allow_html=True)
+# App Title & Header
+st.markdown("<h1>🧬 AI-Marshes Microbe Intelligence Hub</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #334155; font-size: 19px; font-weight: 500;'>Advanced Microbial Risk Diagnostic & Ecosystem Analytics Platform</p>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: #cbd5e1; margin-top: 25px; margin-bottom: 35px;'>", unsafe_allow_html=True)
+
+# Layout Columns (Main Form Layout)
+col1, col2 = st.columns(2, gap="large")
+
+with col1:
+    st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
+    st.markdown("<h3>👤 Patient & Sample Information</h3>", unsafe_allow_html=True)
     
     patient_category = st.selectbox(
-        "👤 فئة المريض (Patient Category):",
-        ["اختر الفئة...", "🤰 امرأة حامل (Pregnant)", "👶 الأطفال والمراهقين (Pediatrics)", "🧑 بالغين / عام (Adults)"]
+        "👤 Patient Category:",
+        ["Select Category...", "🤰 Pregnant Woman", "👶 Pediatrics & Adolescents (1 - 18 yrs)", "🧑 Adults / General"]
     )
     
     sample_type = st.selectbox(
-        "🧪 نوع العينة (Sample Type):",
-        ["اختر العينة...", "💧 عينة بول (Urine)", "🩸 عينة دم (Blood)", "🧬 مسحة مهبلية (Vaginal Swab)", "🩹 مسحة جروح (Wound Swab)"]
+        "🧪 Sample Type:",
+        ["Select Sample Type...", "💧 Urine Sample", "🩸 Blood Sample", "🧬 Vaginal Swab (Pregnant Specific)", "🩹 Wound Swab (Marshes/Tigris Environment)"]
     )
     
+    gene_sequence = st.text_input(
+        "🔬 Bacterial Gene Sequence (Enter A, T, C, G):",
+        value="ATGCGATCGATCGATC"
+    )
+    st.markdown("</div>", unsafe_allow_html=True)
+
+with col2:
+    st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
+    st.markdown("<h3>📊 Clinical & Laboratory Metrics</h3>", unsafe_allow_html=True)
+    
     pathogen = st.selectbox(
-        "🦠 الممرض المكتشف (Matched Pathogen):",
+        "🦠 Matched Pathogen in Database:",
         [
-            "اختر الممرض...",
+            "Select Pathogen...",
             "Escherichia coli (UTI & Enteric)",
             "Pseudomonas aeruginosa (Marshes & Wounds)",
             "Vibrio cholerae (River & Marshes Water)",
-            "Klebsiella pneumoniae (Respiratory)",
+            "Klebsiella pneumoniae (Respiratory & Gynecological)",
             "No Pathogenic Bacteria Detected (Normal)"
         ]
     )
     
-    gene_sequence = st.text_input(
-        "🔬 التسلسل الجيني (Gene Sequence A, T, C, G):",
-        value="ATGCGATCGATCGATC"
-    )
-    
     crp_input = st.number_input(
-        "📊 مستوى بروتين التفاعل C (CRP mg/L - الطبيعي < 5):",
-        min_value=0.0, step=0.1, value=2.0
+        "📊 C-Reactive Protein (CRP) Level (mg/L - Normal < 5):",
+         min_value=0.0, step=0.1, value=2.0
     )
     
     wbc_input = st.number_input(
-        "🩸 تعداد كريات الدم البيضاء (WBC cells/μL):",
+        "🩸 White Blood Cells (WBC) Count (cells/μL - Normal 4000-11000):",
         min_value=0.0, step=100.0, value=7000.0
     )
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    ultrasound = st.selectbox(
-        "🩺 حالة السونار أو التصوير (Ultrasound Status):",
-        ["طبيعي / صافي (Normal / Clear)", "غير طبيعي / تغيرات مرضية (Abnormal / Pathological)"]
-    )
+# Full-width Ultrasound selection
+st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
+ultrasound = st.selectbox(
+    "🩺 Ultrasound & Imaging Status:",
+    ["Normal / Clear", "Abnormal / Pathological Changes Detected"]
+)
+st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown("<br>", unsafe_allow_html=True)
-    run_btn = st.button("🚀 تشغيل التحليل الذكي")
-    # Main Dashboard Area
-st.markdown("<h1 style='text-align: center;'>🧬 منصة أبحاث الأحياء المجهرية والأهوار</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #475569; font-size: 19px; font-weight: 500;'>منصة التشخيص الأكاديمي المتقدم للمخاطر الميكروبية وتحليلات النظام البيئي</p>", unsafe_allow_html=True)
-st.markdown("<hr style='border-color: #cbd5e1; margin-top: 25px; margin-bottom: 30px;'>", unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
-if not run_btn:
-    # Initial State Card
-    st.markdown("""
-        <div class='academic-card' style='text-align: center; border: 2px dashed #94a3b8; padding: 50px;'>
-            <h3 style='color: #065f46;'>⏳ النظام في وضع الاستعداد بانتظار المدخلات</h3>
-            <p style='color: #475569; font-size: 18px;'>يرجى إدخال بيانات المريض والمؤشرات المخبرية من <b>لوحة التحكم الجانبية على اليسار</b>، ثم الضغط على زر <b>'تشغيل التحليل الذكي'</b> لتوليد التقرير الأكاديمي المفصل.</p>
-        </div>
-    """, unsafe_allow_html=True)
+# Run Analysis Button
+run_btn = st.button("🚀 Run Smart Diagnostic Analysis")
 
-else:
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Analysis Execution Logic
+if run_btn:
     clean_seq = gene_sequence.strip().upper()
     valid_dna_pattern = re.compile("^[ATCG]+$")
     
-    if "اختر" in patient_category or "اختر" in sample_type or "اختر" in pathogen:
-        st.error("❌ يرجى اختيار كافة الحقول المطلوبة من لوحة التحكم الجانبية قبل تشغيل التحليل.")
+    if "Select" in patient_category or "Select" in sample_type or "Select" in pathogen:
+        st.error("❌ Please select all required fields before running the analysis.")
     elif len(clean_seq) < 5 or not valid_dna_pattern.match(clean_seq):
-        st.error("⚠️ خطأ في التسلسل الجيني: يجب أن يحتوي فقط على النيوكليوتيدات الصالحة (A, T, C, G).")
+        st.error("⚠️ Invalid Gene Sequence: Ensure it contains only valid nucleotide symbols (A, T, C, G).")
     else:
-        # Risk Score Calculation Logic
+        # Risk Score Calculation (1% to 100%)
         risk_score = 10  
         
         if "Pseudomonas" in pathogen or "Vibrio" in pathogen:
@@ -173,7 +176,7 @@ else:
         if "Abnormal" in ultrasound:
             risk_score += 15
             
-        if "حامل" in patient_category or "الأطفال" in patient_category:
+        if "Pregnant" in patient_category or "Pediatrics" in patient_category:
             risk_score += 10
             
         if "No Pathogenic" in pathogen and crp_input < 5 and wbc_input <= 11000:
@@ -184,33 +187,34 @@ else:
         elif risk_score < 5:
             risk_score = 5
             
-        # Results Section inside Academic Cards
-        st.markdown("<h3 style='margin-bottom: 20px;'>📋 تقرير التقييم التشخيصي والأكاديمي</h3>", unsafe_allow_html=True)
+        # Results Section inside a gorgeous card
+        st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
+        st.markdown("<h3>📋 Diagnostic Results & Risk Assessment Report</h3>", unsafe_allow_html=True)
+        st.markdown("<hr style='border-color: #cbd5e1;'>", unsafe_allow_html=True)
         
-        col_r1, col_r2 = st.columns([1, 2])
+        col_r1, col_r2 = st.columns([1, 2], gap="large")
         
         with col_r1:
-            st.metric(label="معدل الخطورة المحسوب (Risk Rate)", value=f"{risk_score}%", delta="حالة حرجة" if risk_score >= 70 else "حالة مستقرة")
+            st.metric(label="Calculated Risk Rate", value=f"{risk_score}%", delta="Critical Tier" if risk_score >= 70 else "Stable Tier")
             
         with col_r2:
             if risk_score < 30:
-                st.success(f"🟢 حالة آمنة وتحت السيطرة (معدل الخطورة: {risk_score}%)")
+                st.success(f"🟢 Safe Condition & Under Control (Risk Rate: {risk_score}%)")
             elif 30 <= risk_score < 70:
-                st.warning(f"🟡 تنبيه متوسط - خطر محتمل يتطلب المتابعة (معدل الخطورة: {risk_score}%)")
+                st.warning(f"🟡 Moderate Alert - Potential Risk Requiring Follow-up (Risk Rate: {risk_score}%)")
             else:
-                st.error(f"🔴 تحذير عالي الخطورة - يتطلب تدخلاً طبياً فورياً (معدل الخطورة: {risk_score}%)")
+                st.error(f"🔴 High Risk Warning - Immediate Medical Intervention Required (Risk Rate: {risk_score}%)")
         
         st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Detailed Summary Card
         st.markdown(f"""
-        <div class='academic-card'>
-            <h3 style='color: #065f46; margin-top: 0; margin-bottom: 20px;'>🔬 الملخص المخبري الإكلينيكي الشامل</h3>
-            <ul style='color: #334155; line-height: 2.2;'>
-                <li><b>تصنيف المريض:</b> <span style='color: #0f172a; font-weight: 600;'>{patient_category}</span> | <b>نوع العينة:</b> <span style='color: #0f172a; font-weight: 600;'>{sample_type}</span></li>
-                <li><b>الممرض المحدد:</b> <span style='color: #0f172a; font-weight: 600;'>{pathogen}</span></li>
-                <li><b>مستويات المؤشرات الحيوية:</b> CRP: <code style='color: #047857; font-size: 18px;'>{crp_input} mg/L</code> | WBC: <code style='color: #047857; font-size: 18px;'>{wbc_input} cells/μL</code></li>
-                <li><b>التوصية العلاجية الأكاديمية:</b> <b style='color: #064e3b;'>{"يجب التدخل الطبي العاجل ووصف العلاج المضاد للميكروبات المناسب فوراً." if risk_score >= 70 else "حالة المريض مستقرة؛ يوصى بالمتابعة الدورية وجدولة الفحوصات الاحترازية."}</b></li>
+        <div style='background-color: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;'>
+            <h4 style='color: #1e3a8a; margin-top: 0;'>🔬 Clinical Summary & Protocol</h4>
+            <ul style='color: #334155; line-height: 2.0; font-size: 16px;'>
+                <li><b>Patient Profile:</b> {patient_category} | <b>Sample:</b> {sample_type}</li>
+                <li><b>Pathogen Detected:</b> {pathogen}</li>
+                <li><b>Biomarkers:</b> CRP: <code>{crp_input} mg/L</code> | WBC: <code>{wbc_input} cells/μL</code></li>
+                <li><b>Clinical Decision:</b> <b>{"Immediate medical attention & appropriate antibiotic therapy required." if risk_score >= 70 else "Condition stable; regular monitoring and preventive care advised."}</b></li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
