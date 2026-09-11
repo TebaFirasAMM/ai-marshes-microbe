@@ -1,7 +1,7 @@
 import streamlit as st
 import re
 
-# إعدادات صفحة المنصة
+# Page Configuration
 st.set_page_config(
     page_title="AI-Marshes Microbe",
     page_icon="🧬",
@@ -9,154 +9,151 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# تنسيقات الواجهة وتصاميم الألوان المريحة
+# Custom Styling (Darker, Richer & Cleaner UI)
 st.markdown("""
     <style>
     .main {
-        background-color: #f8fafc;
+        background-color: #e2e8f0;
     }
     .stButton>button {
-        background-color: #0d9488;
+        background-color: #0f766e;
         color: white;
         font-weight: bold;
         width: 100%;
         border-radius: 8px;
-        padding: 10px;
+        padding: 12px;
+        font-size: 16px;
     }
     .stButton>button:hover {
-        background-color: #0f766e;
+        background-color: #115e59;
+    }
+    h1, h2, h3 {
+        color: #134e4a;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# عنوان المنصة والترحيب
-st.markdown("<h1 style='text-align: center; color: #0f766e;'>AI-Marshes Microbe</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #64748b;'>منصة التشخيص الذكي المتقدمة للمخاطر الميكروبية (حوامل، أطفال ومراهقين، مياه دجلة والأهوار)</p>", unsafe_allow_html=True)
+# App Title & Header
+st.markdown("<h1 style='text-align: center; color: #134e4a;'>🧬 AI-Marshes Microbe 🧬</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #334155; font-weight: bold;'>Advanced Microbial Risk Diagnostic Platform (Pregnant Women, Pediatrics, Tigris & Marshes Ecosystem)</p>", unsafe_allow_html=True)
 st.markdown("---")
 
-# تقسيم الواجهة إلى أعمدة تنظيمية رصينة
+# Layout Columns
 col1, col2 = st.columns(2)
 
 with col1:
     patient_category = st.selectbox(
-        "فئة المريض:",
-        ["اختر الفئة...", "امرأة حامل", "أطفال ومراهقين (1 - 18 سنة)", "بالغين / عام"]
+        "👤 Patient Category:",
+        ["Select Category...", "🤰 Pregnant Woman", "👶 Pediatrics & Adolescents (1 - 18 yrs)", "🧑 Adults / General"]
     )
     
     sample_type = st.selectbox(
-        "نوع العينة (Sample Type):",
-        ["اختر نوع العينة...", "عينة بول (Urine)", "عينة دم (Blood)", "مسحة مهبلية (Vaginal Swab - خاص بالحوامل)", "مسحة جروح (Wound Swab - بيئة دجلة والأهوار)"]
+        "🧪 Sample Type:",
+        ["Select Sample Type...", "💧 Urine Sample", "🩸 Blood Sample", "🧬 Vaginal Swab (Pregnant Specific)", "🩹 Wound Swab (Marshes/Tigris Environment)"]
     )
     
     gene_sequence = st.text_input(
-        "التسلسل الجيني للبكتيريا (أدخل رموز النيوكليوتيدات A, T, C, G):",
+        "🔬 Bacterial Gene Sequence (Enter A, T, C, G):",
         value="ATGCGATCGATCGATC"
     )
 
 with col2:
     pathogen = st.selectbox(
-        "البكتيريا المطابقة في قاعدة البيانات:",
+        "🦠 Matched Pathogen in Database:",
         [
-            "اختر البكتيريا...",
-            "إشريكية كولونية (E. coli - شائعة بالمسالك والأمعاء)",
-            "زائفة الزنجارية (Pseudomonas - مياه الأهوار والجروح)",
-            "ضمة الكوليرا (Vibrio cholerae - مياه الأنهار والأهوار)",
-            "كلبسيلا رئوية (Klebsiella - التهابات تنفسية ونسائية)",
-            "لا توجد بكتيريا ممرضة (طبيعي)"
+            "Select Pathogen...",
+            "Escherichia coli (UTI & Enteric)",
+            "Pseudomonas aeruginosa (Marshes & Wounds)",
+            "Vibrio cholerae (River & Marshes Water)",
+            "Klebsiella pneumoniae (Respiratory & Gynecological)",
+            "No Pathogenic Bacteria Detected (Normal)"
         ]
     )
     
     crp_input = st.number_input(
-        "مستوى بروتين التفاعل الـ CRP (ملغ/لتر - الطبيعي أقل من 5):",
+        "📊 C-Reactive Protein (CRP) Level (mg/L - Normal < 5):",
         min_value=0.0, step=0.1, value=2.0
     )
     
     wbc_input = st.number_input(
-        "تعداد خلايا الدم البيضاء WBC (خلية/ميكروليتر - الطبيعي 4000 - 11000):",
+        "🩸 White Blood Cells (WBC) Count (cells/μL - Normal 4000-11000):",
         min_value=0.0, step=100.0, value=7000.0
     )
 
 ultrasound = st.selectbox(
-    "حالة السونار (اختياري):",
-    ["سليم / طبيعي", "غير طبيعي / وجود تغيرات مرضية"]
+    "🩺 Ultrasound Status:",
+    ["Normal / Clear", "Abnormal / Pathological Changes Detected"]
 )
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# زر تحليل الحالة الديناميكي
-if st.button("تشغيل النظام الذكي وتحليل النتائج السريرية"):
+# Run Analysis Button
+if st.button("🚀 Run Smart Diagnostic Analysis"):
     
     clean_seq = gene_sequence.strip().upper()
     valid_dna_pattern = re.compile("^[ATCG]+$")
     
-    if patient_category == "اختر الفئة..." or sample_type == "اختر نوع العينة..." or pathogen == "اختر البكتيريا...":
-        st.error("❌ يرجى اختيار جميع الحقول الأساسية (فئة المريض، نوع العينة، والبكتيريا) قبل تشغيل التحليل.")
+    if patient_category == "Select Category..." or sample_type == "Select Sample Type..." or pathogen == "Select Pathogen...":
+        st.error("❌ Please select all required fields before running the analysis.")
     elif len(clean_seq) < 5 or not valid_dna_pattern.match(clean_seq):
-        st.error("⚠️ خطأ في التسلسل الجيني المرفق: التسلسل المدخل غير صالح أو قصير جداً. يرجى التأكد من اقتصار الحروف حصراً على رموز النيوكليوتيدات السليمة (A, T, C, G).")
+        st.error("⚠️ Invalid Gene Sequence: Ensure it contains only valid nucleotide symbols (A, T, C, G).")
     else:
-        risk_score = 0
-        clinical_notes = []
+        # Precise Risk Score Calculation (1% to 100%)
+        risk_score = 10  # Base score
         
-        if "لا توجد" in pathogen:
-            risk_score += 0
-            clinical_notes.append("الفحص الجيني والميكروبيولوجي لا يظهر أي ممرضات بكتيرية خطيرة.")
-        else:
-            risk_score += 25
-            clinical_notes.append(f"تم رصد مطابقة إيجابية مع سلالة ({pathogen}) في العينة المرفقة.")
-            
-        if crp_input > 40:
+        # Pathogen impact
+        if "Pseudomonas" in pathogen or "Vibrio" in pathogen:
             risk_score += 35
-            clinical_notes.append(f"مستوى بروتين التفاعل (CRP) مرتفع جداً ({crp_input} ملغ/لتر)، مما يدل على استجابة التهابية جهازية حادة.")
+        elif "Escherichia" in pathogen or "Klebsiella" in pathogen:
+            risk_score += 25
+        elif "No Pathogenic" in pathogen:
+            risk_score = 5
+            
+        # CRP impact
+        if crp_input > 40:
+            risk_score += 30
         elif 10 <= crp_input <= 40:
             risk_score += 20
-            clinical_notes.append(f"مستوى بروتين التفاعل (CRP) مرتفع بشكل ملحوظ ({crp_input} ملغ/لتر)، ويشير إلى التهاب متوسط النشاط.")
         elif 5 <= crp_input < 10:
             risk_score += 10
-            clinical_notes.append(f"مستوى بروتين التفاعل (CRP) عند الحد الحدي الأعلى ({crp_input} ملغ/لتر).")
-        else:
-            clinical_notes.append(f"مستوى بروتين التفاعل (CRP) ضمن النطاق الطبيعي المطمئن ({crp_input} ملغ/لتر).")
             
-        if wbc_input > 15000:
-            risk_score += 30
-            clinical_notes.append(f"التعداد الكلي لخلايا الدم البيضاء مرتفع بشدة ({wbc_input} خلية/ميكروليتر)، مما يعكس نشاطاً مناعياً هجومياً ضد عدوى جرثومية.")
+        # WBC impact
+       if wbc_input > 15000:
+            risk_score += 20
         elif 11000 < wbc_input <= 15000:
-            risk_score += 15
-            clinical_notes.append(f"تعداد خلايا الدم البيضاء مرتفع قليلاً عن المعدل الطبيعي ({wbc_input} خلية/ميكروليتر).")
-        elif wbc_input < 4000:
-            risk_score += 25
-            clinical_notes.append(f"تعداد خلايا الدم البيضاء منخفض ({wbc_input} خلية/ميكروليتر)، وهو مؤشر استجابة مناعية يستدعي الحذر.")
-        else:
-            clinical_notes.append(f"تعداد خلايا الدم البيضاء ضمن النطاق الطبيعي المستقر ({wbc_input} خلية/ميكروليتر).")
-            
-        if ultrasound == "غير طبيعي / وجود تغيرات مرضية":
-            risk_score += 25
-            clinical_notes.append("تقرير السونار السريري يظهر تغيرات مرضية أو احتقان، مما يرفع من دلالة الإصابة النسيجية.")
-        else:
-            clinical_notes.append("فحص السونار أظهر استقراراً هيكلياً دون تغيرات مرضية ظاهرة.")
-            
-        if "حامل" in patient_category:
-            risk_score += 15
-            clinical_notes.append("تم تفعيل بروتوكول الرعاية الخاصة بفئة الحوامل نظرًا لحساسية الحالة وضرورة الوقاية من أي مضاعفات صاعدة.")
-        elif "أطفال" in patient_category:
             risk_score += 10
-            clinical_notes.append("تم تطبيق معايير الأمان الخاصة بفئة الأطفال والمراهقين لسرعة الاستجابة السريرية.")
-
-        st.markdown("---")
-        st.subheader("تقرير التشخيص السريري المتقدم (Dynamic Clinical Report):")
-        
-        if risk_score >= 65:
-            st.error("🔴 إنذار خطر عالي - تداخل مرضي يتطلب تدخلاً علاجياً عاجلاً:\nالتحليل الشامل للأعراض، المؤشرات المخبرية (CRP و WBC)، وفحص السونار يوضح وجود نشاط ميكروبي حاد يستوجب بدء العلاج بالمضادات الحيوية المناسبة فوراً وتحت إشراف طبي.")
-        elif 30 <= risk_score < 65:
-            st.warning("🟡 تنبيه متوسط - حالة تستوجب المتابعة الدورية:\nالمؤشرات الحيوية وفحوصات الدم تظهر نشاطاً التهابياً أو تطابقاً جرثومياً جزئياً؛ يوصى بإعادة الفحص خلال فترة قصيرة ومراقبة الأعراض بدقة.")
-        else:
-            st.success("🟢 الحالة مستقرة والمؤشرات ضمن السيطرة:\nلا توجد دلائل على مخاطر ميكروبية حرجة بناءً على المدخلات الحالية والفحوصات المخبرية المرفقة، مع التأكيد على المتابعة الوقائية الاعتيادية.")
+        elif wbc_input < 4000:
+            risk_score += 15
             
-        st.markdown("### ملخص القراءات والتحليل الاستدلالي:")
-        for note in clinical_notes:
-            st.markdown(f"- {note}")
+        # Ultrasound impact
+        if ultrasound == "Abnormal / Pathological Changes Detected":
+            risk_score += 15
+            
+        # Patient sensitivity category impact
+        if "Pregnant" in patient_category or "Pediatrics" in patient_category:
+            risk_score += 10
+            
+        # Final boundary check (1% to 100%)
+        if "No Pathogenic" in pathogen and crp_input < 5 and wbc_input <= 11000:
+            risk_score = 8  # Safe baseline
+            
+        if risk_score > 98:
+            risk_score = 98
+        elif risk_score < 5:
+            risk_score = 5
+            
+        st.markdown("---")
+        st.subheader("📋 Diagnostic Results & Risk Assessment:")
+        
+        # Display Results with Exact Percentage (1% - 100%)
+        if risk_score < 30:
+            st.success(f"🟢 Safe Condition & Under Control (Calculated Risk Rate: {risk_score}%)")
+        elif 30 <= risk_score < 70:
+            st.warning(f"🟡 Moderate Alert - Potential Risk Requiring Follow-up (Calculated Risk Rate: {risk_score}%)")
+        else:
+            st.error(f"🔴 High Risk Warning - Immediate Medical Intervention Required (Calculated Risk Rate: {risk_score}%)")
             
         st.markdown(f"""
-        ---
-        * فئة المريض: {patient_category} | نوع العينة: {sample_type}
-        * التدقيق الجيني والمخابري: تم فحص التوافق بنجاح ومعالجة القيم الحيوية (CRP: {crp_input} | WBC: {wbc_input}) وفق النظام الاستدلالي الحيوي للمنصة.
+        * Lab Summary: CRP: {crp_input} mg/L | WBC: {wbc_input} cells/μL
+        * Clinical Note: {"Immediate medical attention & appropriate antibiotic therapy required." if risk_score >= 70 else "Condition stable; regular monitoring and preventive care advised."}
         """)
