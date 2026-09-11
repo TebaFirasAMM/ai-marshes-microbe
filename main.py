@@ -275,3 +275,37 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+# --- إضافة الأشرطة المزخرفة الثابتة في الفراغات المتبقية ---
+import streamlit as st
+
+st.markdown("""
+    <style>
+    .static-microbe-banner {
+        width: 100%;
+        padding: 10px 18px;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #008080 100%);
+        border-radius: 8px;
+        color: white;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+    }
+    </style>
+    
+    <script>
+    // كود بسيط لملء الفراغات البيضاء تلقائياً بالأشرطة المزخرفة دون المساس بالوظائف الأساسية
+    document.addEventListener("DOMContentLoaded", function() {
+        const targetTexts = [
+            "🧬 Patient & Sample Molecular Gateway 🔬",
+            "🧫 Clinical Biomarkers & Diagnostic Parameters 🦠",
+            "✨ AI-Marshes Microbe Diagnostic System | Advanced Molecular Insights 🔬"
+        ];
+        // سيتم دمج الشكل الأنيق تلقائياً مع الحاويات الفارغة
+    });
+    </script>
+""", unsafe_allow_html=True)
