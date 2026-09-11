@@ -9,16 +9,14 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Professional Blue Tech & Medical Styling + Microbe Animated Banners CSS
+# Professional Blue Tech & Medical Styling + Clean Animated Banners (No text, moving icons only)
 st.markdown("""
     <style>
-    /* Global Page Background: Soft, comfortable light blue */
     .stApp {
         background-color: #f0f6ff;
         color: #0f172a;
     }
     
-    /* Main Header & Title Style */
     h1 {
         color: #1e3a8a !important;
         font-weight: 800 !important;
@@ -26,13 +24,11 @@ st.markdown("""
         text-align: center;
     }
     
-    /* Section & Subheaders */
     h3, h4 {
         color: #1e40af !important;
         font-weight: 700 !important;
     }
     
-    /* Professional Cards for Inputs & Results */
     .dashboard-card {
         background-color: #ffffff;
         border: 1px solid #cbd5e1;
@@ -42,14 +38,12 @@ st.markdown("""
         margin-bottom: 25px;
     }
     
-    /* Labels and Input Titles */
     label, .stMarkdown p {
         font-size: 17px !important;
         font-weight: 600 !important;
         color: #1e3a8a !important;
     }
     
-    /* Deep Blue & Teal Styled Button */
     .stButton>button {
         background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
         color: #ffffff;
@@ -67,69 +61,56 @@ st.markdown("""
         box-shadow: 0 8px 25px rgba(29, 78, 216, 0.5);
     }
 
-    /* --- تنسيق الأشرطة المزخرفة المتحركة الحيوية --- */
+    /* --- شريط ديكوري متحرك بدون أي نصوص، النقشات فقط تتحرك --- */
     .microbe-banner {
         width: 100%;
-        padding: 16px 20px;
+        height: 38px;
         background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #008080 100%);
-        border-radius: 10px;
-        color: white;
-        text-align: center;
+        border-radius: 8px;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         margin-top: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
     .microbe-banner::before {
-        content: "🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠";
+        content: "🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠";
         position: absolute;
         top: 0;
         left: 0;
         width: 200%;
         height: 100%;
-        font-size: 16px;
-        letter-spacing: 15px;
-        opacity: 0.15;
+        font-size: 18px;
+        letter-spacing: 20px;
+        opacity: 0.25;
         white-space: nowrap;
-        animation: slideBanner 25s linear infinite;
+        animation: slideBanner 20s linear infinite;
         display: flex;
         align-items: center;
+        color: white;
     }
     @keyframes slideBanner {
         0% { transform: translateX(0); }
         100% { transform: translateX(-50%); }
     }
-    .microbe-banner-text {
-        position: relative;
-        z-index: 2;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
     </style>
 """, unsafe_allow_html=True)
 
-# دالة مساعدة لطباعة الشريط المزخرف بسهولة
-def render_banner(text):
-    st.markdown(f"""
-        <div class="microbe-banner">
-            <div class="microbe-banner-text">{text}</div>
-        </div>
-    """, unsafe_allow_html=True)
+# دالة لطباعة الشريط المزخرف الخالي من النصوص
+def render_banner():
+    st.markdown('<div class="microbe-banner"></div>', unsafe_allow_html=True)
 
 # App Title & Header
 st.markdown("<h1>🧬 AI-Marshes Microbe Intelligence Hub</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #334155; font-size: 19px; font-weight: 500;'>Advanced Microbial Risk Diagnostic & Ecosystem Analytics Platform</p>", unsafe_allow_html=True)
-st.markdown("<hr style='border-color: #cbd5e1; margin-top: 25px; margin-bottom: 35px;'>", unsafe_allow_html=True)
 
-# --- الشريط الأول: فوق قسم Patient & Sample Information ---
-render_banner("🧬 Patient & Sample Molecular Gateway 🔬")
+# --- الشريط الأول المتحرك تحت العنوان مباشرة ---
+render_banner()
 
 # Layout Columns (Main Form Layout)
 col1, col2 = st.columns(2, gap="large")
-with col1:   
+
+with col1:
     st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
     st.markdown("<h3>👤 Patient & Sample Information</h3>", unsafe_allow_html=True)
     
@@ -148,11 +129,7 @@ with col1:
         value="ATGCGATCGATCGATC"
     )
     st.markdown("</div>", unsafe_allow_html=True)
-
-with col2:
-    # --- الشريط الثاني: فوق قسم Clinical & Laboratory Metrics ---
-    render_banner("🧫 Clinical Biomarkers & Diagnostic Parameters 🦠")
-    
+ with col2:
     st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
     st.markdown("<h3>📊 Clinical & Laboratory Metrics</h3>", unsafe_allow_html=True)
     
@@ -189,9 +166,6 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# --- الشريط الثالث: تحت خانات الإدخال وقبل زر التحليل مباشرة ---
-render_banner("⚡ Smart AI Diagnostic Processing Unit & Analysis Hub 🔬")
-
 # Run Analysis Button
 run_btn = st.button("🚀 Run Smart Diagnostic Analysis")
 
@@ -207,7 +181,6 @@ if run_btn:
     elif len(clean_seq) < 5 or not valid_dna_pattern.match(clean_seq):
         st.error("⚠️ Invalid Gene Sequence: Ensure it contains only valid nucleotide symbols (A, T, C, G).")
     else:
-        # Risk Score Calculation (1% to 100%)
         risk_score = 10  
         
         if "Pseudomonas" in pathogen or "Vibrio" in pathogen:
@@ -233,6 +206,7 @@ if run_btn:
             
         if "Abnormal" in ultrasound:
             risk_score += 15
+            
         if "Pregnant" in patient_category or "Pediatrics" in patient_category:
             risk_score += 10
             
@@ -244,7 +218,6 @@ if run_btn:
         elif risk_score < 5:
             risk_score = 5
             
-        # Results Section inside a gorgeous card
         st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
         st.markdown("<h3>📋 Diagnostic Results & Risk Assessment Report</h3>", unsafe_allow_html=True)
         st.markdown("<hr style='border-color: #cbd5e1;'>", unsafe_allow_html=True)
@@ -259,7 +232,7 @@ if run_btn:
                 st.success(f"🟢 Safe Condition & Under Control (Risk Rate: {risk_score}%)")
             elif 30 <= risk_score < 70:
                 st.warning(f"🟡 Moderate Alert - Potential Risk Requiring Follow-up (Risk Rate: {risk_score}%)")
-            else:
+else:
                 st.error(f"🔴 High Risk Warning - Immediate Medical Intervention Required (Risk Rate: {risk_score}%)")
         
         st.markdown("<br>", unsafe_allow_html=True)
@@ -277,5 +250,5 @@ if run_btn:
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# --- الشريط الرابع: في نهاية الصفحة أسفل التقارير والنتائج ---
-render_banner("✨ AI-Marshes Microbe Diagnostic System &nbsp;|&nbsp; Advanced Molecular & Clinical Insights 🦠🔬")
+# --- الشريط الثاني المتحرك في نهاية الصفحة ---
+render_banner()
