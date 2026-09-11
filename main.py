@@ -129,7 +129,7 @@ with col1:
         value="ATGCGATCGATCGATC"
     )
     st.markdown("</div>", unsafe_allow_html=True)
-with col2:
+ with col2:
     st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
     st.markdown("<h3>📊 Clinical & Laboratory Metrics</h3>", unsafe_allow_html=True)
     
@@ -232,7 +232,7 @@ if run_btn:
                 st.success(f"🟢 Safe Condition & Under Control (Risk Rate: {risk_score}%)")
             elif 30 <= risk_score < 70:
                 st.warning(f"🟡 Moderate Alert - Potential Risk Requiring Follow-up (Risk Rate: {risk_score}%)")
-else:
+ else:
                 st.error(f"🔴 High Risk Warning - Immediate Medical Intervention Required (Risk Rate: {risk_score}%)")
         
         st.markdown("<br>", unsafe_allow_html=True)
