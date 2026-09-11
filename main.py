@@ -232,7 +232,7 @@ if run_btn:
                 st.success(f"🟢 Safe Condition & Under Control (Risk Rate: {risk_score}%)")
             elif 30 <= risk_score < 70:
                 st.warning(f"🟡 Moderate Alert - Potential Risk Requiring Follow-up (Risk Rate: {risk_score}%)")
- else:
+            else:
                 st.error(f"🔴 High Risk Warning - Immediate Medical Intervention Required (Risk Rate: {risk_score}%)")
         
         st.markdown("<br>", unsafe_allow_html=True)
