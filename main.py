@@ -252,3 +252,38 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 # --- الشريط الثاني المتحرك في نهاية الصفحة ---
 render_banner()
+# --- إضافة شريط متحرك ذكي في أسفل الصفحة ---
+st.markdown("""
+    <style>
+    .microbe-banner-bottom {
+        width: 100%;
+        height: 38px;
+        background: #f0f6ff;
+        position: relative;
+        overflow: hidden;
+        margin-top: 35px;
+        margin-bottom: 15px;
+    }
+    .microbe-banner-bottom::before {
+        content: "🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        font-size: 18px;
+        letter-spacing: 20px;
+        opacity: 0.85;
+        white-space: nowrap;
+        animation: slideBannerBottom 20s linear infinite;
+        display: flex;
+        align-items: center;
+        color: #1e3a8a;
+    }
+    @keyframes slideBannerBottom {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    </style>
+    <div class="microbe-banner-bottom"></div>
+""", unsafe_allow_html=True)
