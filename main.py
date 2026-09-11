@@ -235,7 +235,7 @@ if run_btn:
 else:
                 st.error(f"🔴 High Risk Warning - Immediate Medical Intervention Required (Risk Rate: {risk_score}%)")
         
- st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
         st.markdown(f"""
         <div style='background-color: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;'>
             <h4 style='color: #1e3a8a; margin-top: 0;'>🔬 Clinical Summary & Protocol</h4>
