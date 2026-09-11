@@ -129,7 +129,7 @@ render_banner("🧬 Patient & Sample Molecular Gateway 🔬")
 
 # Layout Columns (Main Form Layout)
 col1, col2 = st.columns(2, gap="large")
-                     with col1:
+with col1:   
     st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
     st.markdown("<h3>👤 Patient & Sample Information</h3>", unsafe_allow_html=True)
     
