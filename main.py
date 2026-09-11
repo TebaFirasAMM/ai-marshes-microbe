@@ -117,7 +117,7 @@ if st.button("🚀 Run Smart Diagnostic Analysis"):
         elif 5 <= crp_input < 10:
             risk_score += 10
             
-        # WBC impact
+       # WBC impact
        if wbc_input > 15000:
             risk_score += 20
         elif 11000 < wbc_input <= 15000:
