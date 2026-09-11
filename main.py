@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Professional Blue Tech & Medical Styling (Light Blue Background & Deep Blue Elements)
+# Professional Blue Tech & Medical Styling + Microbe Animated Banners CSS
 st.markdown("""
     <style>
     /* Global Page Background: Soft, comfortable light blue */
@@ -66,18 +66,70 @@ st.markdown("""
         background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
         box-shadow: 0 8px 25px rgba(29, 78, 216, 0.5);
     }
+
+    /* --- تنسيق الأشرطة المزخرفة المتحركة الحيوية --- */
+    .microbe-banner {
+        width: 100%;
+        padding: 16px 20px;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #008080 100%);
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    .microbe-banner::before {
+        content: "🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        font-size: 16px;
+        letter-spacing: 15px;
+        opacity: 0.15;
+        white-space: nowrap;
+        animation: slideBanner 25s linear infinite;
+        display: flex;
+        align-items: center;
+    }
+    @keyframes slideBanner {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .microbe-banner-text {
+        position: relative;
+        z-index: 2;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
     </style>
 """, unsafe_allow_html=True)
+
+# دالة مساعدة لطباعة الشريط المزخرف بسهولة
+def render_banner(text):
+    st.markdown(f"""
+        <div class="microbe-banner">
+            <div class="microbe-banner-text">{text}</div>
+        </div>
+    """, unsafe_allow_html=True)
 
 # App Title & Header
 st.markdown("<h1>🧬 AI-Marshes Microbe Intelligence Hub</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #334155; font-size: 19px; font-weight: 500;'>Advanced Microbial Risk Diagnostic & Ecosystem Analytics Platform</p>", unsafe_allow_html=True)
 st.markdown("<hr style='border-color: #cbd5e1; margin-top: 25px; margin-bottom: 35px;'>", unsafe_allow_html=True)
 
+# --- الشريط الأول: فوق قسم Patient & Sample Information ---
+render_banner("🧬 Patient & Sample Molecular Gateway 🔬")
+
 # Layout Columns (Main Form Layout)
 col1, col2 = st.columns(2, gap="large")
-
-with col1:
+ with col1:
     st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
     st.markdown("<h3>👤 Patient & Sample Information</h3>", unsafe_allow_html=True)
     
@@ -98,6 +150,9 @@ with col1:
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
+    # --- الشريط الثاني: فوق قسم Clinical & Laboratory Metrics ---
+    render_banner("🧫 Clinical Biomarkers & Diagnostic Parameters 🦠")
+    
     st.markdown("<div class='dashboard-card'>", unsafe_allow_html=True)
     st.markdown("<h3>📊 Clinical & Laboratory Metrics</h3>", unsafe_allow_html=True)
     
@@ -133,6 +188,9 @@ ultrasound = st.selectbox(
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
+
+# --- الشريط الثالث: تحت خانات الإدخال وقبل زر التحليل مباشرة ---
+render_banner("⚡ Smart AI Diagnostic Processing Unit & Analysis Hub 🔬")
 
 # Run Analysis Button
 run_btn = st.button("🚀 Run Smart Diagnostic Analysis")
@@ -175,7 +233,6 @@ if run_btn:
             
         if "Abnormal" in ultrasound:
             risk_score += 15
-            
         if "Pregnant" in patient_category or "Pediatrics" in patient_category:
             risk_score += 10
             
@@ -217,95 +274,8 @@ if run_btn:
             </ul>
         </div>
         """, unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
-import streamlit as st
 
-# --- إضافة الشريط المزخرف الخاص بالأحياء المجهرية في نهاية الصفحة أو المكان المخصص ---
-st.markdown(
-    """
-    <style>
-    .microbe-banner {
-        width: 100%;
-        padding: 22px;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #008080 100%);
-        border-radius: 12px;
-        color: white;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-        margin-top: 25px;
-        margin-bottom: 25px;
-    }
-    /* إضافة نقشات جمالية تفاعلية تعبر عن الأحياء المجهرية والـ DNA */
-    .microbe-banner::before {
-        content: "🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠 🧬 🔬 🧫 🦠";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 100%;
-        font-size: 20px;
-        letter-spacing: 15px;
-        opacity: 0.12;
-        white-space: nowrap;
-        animation: slideBanner 25s linear infinite;
-        display: flex;
-        align-items: center;
-    }
-    @keyframes slideBanner {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-    .microbe-banner-text {
-        position: relative;
-        z-index: 2;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 15px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-    </style>
+st.markdown("</div>", unsafe_allow_html=True)
 
-    <div class="microbe-banner">
-        <div class="microbe-banner-text">
-            ✨ AI-Marshes Microbe Diagnostic System &nbsp;|&nbsp; Advanced Molecular & Clinical Insights 🦠🔬
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-# --- إضافة الأشرطة المزخرفة الثابتة في الفراغات المتبقية ---
-import streamlit as st
-
-st.markdown("""
-    <style>
-    .static-microbe-banner {
-        width: 100%;
-        padding: 10px 18px;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #008080 100%);
-        border-radius: 8px;
-        color: white;
-        text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 13px;
-        font-weight: 600;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 10px;
-        margin-bottom: 10px;
-        letter-spacing: 0.5px;
-    }
-    </style>
-    
-    <script>
-    // كود بسيط لملء الفراغات البيضاء تلقائياً بالأشرطة المزخرفة دون المساس بالوظائف الأساسية
-    document.addEventListener("DOMContentLoaded", function() {
-        const targetTexts = [
-            "🧬 Patient & Sample Molecular Gateway 🔬",
-            "🧫 Clinical Biomarkers & Diagnostic Parameters 🦠",
-            "✨ AI-Marshes Microbe Diagnostic System | Advanced Molecular Insights 🔬"
-        ];
-        // سيتم دمج الشكل الأنيق تلقائياً مع الحاويات الفارغة
-    });
-    </script>
-""", unsafe_allow_html=True)
+# --- الشريط الرابع: في نهاية الصفحة أسفل التقارير والنتائج ---
+render_banner("✨ AI-Marshes Microbe Diagnostic System &nbsp;|&nbsp; Advanced Molecular & Clinical Insights 🦠🔬")
