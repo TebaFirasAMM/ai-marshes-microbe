@@ -1,11 +1,6 @@
 import streamlit as st
 import re
-import streamlit.components.v1 as components
 
-components.html(
-    '<meta name="google-site-verification" content="WvWqpxPre8eh9xRCdG52RG19FPSg_kO_Yg7j3yZ4W88">',
-    height=0, width=0
-)
 # Page Configuration
 st.set_page_config(
     page_title="AI-Marshes Microbe - Diagnostic Hub",
@@ -291,12 +286,4 @@ st.markdown("""
     }
     </style>
     <div class="microbe-banner-bottom"></div>
-""", unsafe_allow_html=True)
-st.markdown("""
-    <head>
-        <meta name="google-site-verification" content="WvWqpxPre8eh9xRcDgS2RGl9FPSgJiYg_xvbbjUZNHI" />
-        <meta name="description" content="AI-Marshes Microbe (AMM) - Advanced Microbial Risk Diagnostic & Ecosystem Analytics Platform.">
-        <meta name="keywords" content="AI-Marshes Microbe, AMM, AI Marshes Microbe, amm microbe, microbial diagnostic hub, University of Mosul">
-        <meta name="author" content="Microbiology Student Platform">
-    </head>
 """, unsafe_allow_html=True)
