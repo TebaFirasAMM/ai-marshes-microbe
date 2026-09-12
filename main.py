@@ -1,6 +1,11 @@
 import streamlit as st
 import re
-st.markdown('<meta name="google-site-verification" content="WvWqpxPre8eh9xRCdG52RG19FPSg_kO_Yg7j3yZ4W88" />', unsafe_allow_html=True)
+import streamlit.components.v1 as components
+
+components.html(
+    '<meta name="google-site-verification" content="WvWqpxPre8eh9xRCdG52RG19FPSg_kO_Yg7j3yZ4W88">',
+    height=0, width=0
+)
 # Page Configuration
 st.set_page_config(
     page_title="AI-Marshes Microbe - Diagnostic Hub",
