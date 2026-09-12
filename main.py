@@ -1,6 +1,6 @@
 import streamlit as st
 import re
-
+st.markdown('<meta name="google-site-verification" content="WvWqpxPre8eh9xRcDgS2RGl9FPSgJiYg_xvbbjUZNHI">', unsafe_allow_html=True)
 # Page Configuration
 st.set_page_config(
     page_title="AI-Marshes Microbe - Diagnostic Hub",
