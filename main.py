@@ -287,3 +287,11 @@ st.markdown("""
     </style>
     <div class="microbe-banner-bottom"></div>
 """, unsafe_allow_html=True)
+st.markdown("""
+    <head>
+        <meta name="google-site-verification" content="WvWqpxPre8eh9xRcDgS2RGl9FPSgJiYg_xvbbjUZNHI" />
+        <meta name="description" content="AI-Marshes Microbe (AMM) - Advanced Microbial Risk Diagnostic & Ecosystem Analytics Platform.">
+        <meta name="keywords" content="AI-Marshes Microbe, AMM, AI Marshes Microbe, amm microbe, microbial diagnostic hub, University of Mosul">
+        <meta name="author" content="Microbiology Student Platform">
+    </head>
+""", unsafe_allow_html=True)
